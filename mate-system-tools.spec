@@ -10,7 +10,7 @@ Release:	1
 License:	GPL v2+ (programs), FDL v1.1+ (documentation)
 Group:		X11/Applications
 Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
-# Source0-md5:	44f3f54f8be5e509b258761386dfca57
+# Source0-md5:	13042656aef4fc90e294d4486313d873
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.9
@@ -106,9 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/caja/extensions-2.0/*.la
 
-# nl locale not ported to MATE yet
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/mate/help/{services-admin,time-admin}
-%{__rm} $RPM_BUILD_ROOT%{_datadir}/omf/mate-system-tools/{services-admin,time-admin}-nl.omf
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cmn
 
 # fixup .pc file (wrong Name, unprocessed dir names)
 %{__sed} -i -e '/^Name:/s/gst/mate-system-tools/' \
