@@ -5,11 +5,11 @@
 Summary:	MATE System Tools
 Summary(pl.UTF-8):	Narzędzia systemowe dla środowiska MATE
 Name:		mate-system-tools
-Version:	1.6.0
+Version:	1.8.0
 Release:	1
 License:	GPL v2+ (programs), FDL v1.1+ (documentation)
 Group:		X11/Applications
-Source0:	http://pub.mate-desktop.org/releases/1.6/%{name}-%{version}.tar.xz
+Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
 # Source0-md5:	44f3f54f8be5e509b258761386dfca57
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.60
@@ -24,8 +24,7 @@ BuildRequires:	libiw-devel
 BuildRequires:	liboobs-devel >= 1.1.0
 BuildRequires:	libtool >= 1:1.4.3
 BuildRequires:	mate-common
-BuildRequires:	mate-doc-utils
-%{?with_caja:BuildRequires:	mate-file-manager-devel >= 1.1.0}
+%{?with_caja:BuildRequires:	caja-devel >= 1.1.0}
 BuildRequires:	mate-polkit-devel >= 0.92
 BuildRequires:	pango-devel
 BuildRequires:	pkgconfig >= 1:0.19
@@ -34,6 +33,7 @@ BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	system-tools-backends-devel >= 2.10.1
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
+BuildRequires:	yelp-tools
 Requires:	dbus >= 0.32
 Requires:	glib2 >= 1:2.26.0
 Requires:	gtk+2 >= 2:2.20.0
@@ -66,17 +66,18 @@ development.
 Ten pakiet zawiera pliki potrzebne przy programowaniu związanym z
 MATE System Tools (narzędziami systemowymi MATE).
 
-%package -n mate-file-manager-extension-shares
+%package -n caja-extension-shares
 Summary:	Shares configuration extension for Caja (MATE file manager)
 Summary(pl.UTF-8):	Rozszerzenie do konfiguracji udziałów dla zarządcy plików Caja
 Group:		X11/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	mate-file-manager >= 1.1.0
+Requires:	caja >= 1.1.0
+Obsoletes:	mate-file-manager-extension-shares
 
-%description -n mate-file-manager-extension-shares
+%description -n caja-extension-shares
 Shares configuration extension for Caja (MATE file manager)
 
-%description -n mate-file-manager-extension-shares -l pl.UTF-8
+%description -n caja-extension-shares -l pl.UTF-8
 Rozszerzenie do konfiguracji udziałów dla zarządcy plików Caja.
 
 %prep
@@ -86,7 +87,6 @@ Rozszerzenie do konfiguracji udziałów dla zarządcy plików Caja.
 %{__libtoolize}
 %{__intltoolize}
 mate-doc-common --copy
-mate-doc-prepare --copy --force
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
@@ -156,7 +156,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/mate-system-tools.pc
 
 %if %{with caja}
-%files -n mate-file-manager-extension-shares
+%files -n caja-extension-shares
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/caja/extensions-2.0/libcaja-gst-shares.so
 %endif
