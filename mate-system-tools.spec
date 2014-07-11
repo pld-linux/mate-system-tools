@@ -14,6 +14,7 @@ Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
 URL:		http://mate-desktop.org/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.9
+%{?with_caja:BuildRequires:	caja-devel >= 1.1.0}
 BuildRequires:	dbus-devel >= 0.32
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel >= 0.10.40
@@ -24,7 +25,6 @@ BuildRequires:	libiw-devel
 BuildRequires:	liboobs-devel >= 1.1.0
 BuildRequires:	libtool >= 1:1.4.3
 BuildRequires:	mate-common
-%{?with_caja:BuildRequires:	caja-devel >= 1.1.0}
 BuildRequires:	mate-polkit-devel >= 0.92
 BuildRequires:	pango-devel
 BuildRequires:	pkgconfig >= 1:0.19
@@ -86,14 +86,12 @@ Rozszerzenie do konfiguracji udziałów dla zarządcy plików Caja.
 %build
 %{__libtoolize}
 %{__intltoolize}
-mate-doc-common --copy
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 %configure \
 	%{!?with_caja:--disable-caja} \
-	--disable-scrollkeeper \
 	--disable-silent-rules \
 	--disable-static
 
@@ -106,16 +104,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/caja/extensions-2.0/*.la
 
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cmn
-
 # fixup .pc file (wrong Name, unprocessed dir names)
 %{__sed} -i -e '/^Name:/s/gst/mate-system-tools/' \
 	-e 's,@pixmapsdir@,%{_datadir}/%{name}/pixmaps,' \
 	-e 's,@scriptsdir@,%{_datadir}/%{name}/ui,' \
 	mate-system-tools.pc
 
-# mate-system-tools gettext domain, 5 separate mate and omf dirs
-%find_lang %{name} --with-mate --with-omf --all-name
+# mate-system-tools gettext domain, 5 separate mate dirs
+%find_lang %{name} --with-mate --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
