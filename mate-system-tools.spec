@@ -17,7 +17,7 @@ BuildRequires:	automake >= 1:1.9
 %{?with_caja:BuildRequires:	caja-devel >= 1.1.0}
 BuildRequires:	dbus-devel >= 0.32
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	gettext-devel >= 0.10.40
+BuildRequires:	gettext-tools >= 0.10.40
 BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gtk+2-devel >= 2:2.20.0
 BuildRequires:	intltool >= 0.35.0
