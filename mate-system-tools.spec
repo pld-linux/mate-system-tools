@@ -6,7 +6,7 @@ Summary:	MATE System Tools
 Summary(pl.UTF-8):	Narzędzia systemowe dla środowiska MATE
 Name:		mate-system-tools
 Version:	1.8.1
-Release:	2
+Release:	3
 License:	GPL v2+ (programs), FDL v1.1+ (documentation)
 Group:		X11/Applications
 Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
